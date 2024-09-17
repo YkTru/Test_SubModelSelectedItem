@@ -62,7 +62,6 @@ module TextBoxC =
         | DummyMsg -> m
 
 
-// let's say a Form
 module Form =
 
     type Components =
@@ -171,13 +170,18 @@ type TextBoxC_VM (args) =
 type Form_VM (args) =
     inherit ViewModelBase<Form.Model, Form.Msg>(args)
 
-    // ### Problem: Binding.TwoWayT.id is not working
+    // ### Problem: I guess I should use SubModelSeqKeyedT.id, but what to put as VM?
+    // 1- Should I pattern match to get the different TextBoxABC_VMs? 
+    // 2- Or Make a Component_VM so it wraps the other VMs because Entities = Components? (here I feel confused honnestly)
+    // Nothing I've tried in these directions has worked until now (most probably due to a lack of skill/understanding).
+   
     // Sample: "SelectedEntity" |> Binding.subModelSelectedItem("Entities", (fun m -> m.Selected), Select)
     let selectedComponent_Binding =
-        Binding.TwoWayT.id
-        >> Binding.addLazy (=)
+        Binding.SubModelSeqKeyedT.id (*???*) _.Id
+        >> Binding.addLazy (=) // ### add this I guess too?
         >> Binding.mapModel (fun (model: Form.Model) -> model.SelectedComponent)
         >> Binding.mapMsg Form.Select
+    
 
     // ### Hard to tell if working other then at init()
     let selectedItemText_Binding =
