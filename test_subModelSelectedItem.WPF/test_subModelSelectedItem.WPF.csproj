@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>false</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Mvvm" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.VS2019Blue" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.VS2019Dark" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.VS2019Light" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Win11Dark" Version="23.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Win11Light" Version="23.2.3" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\test_subModelSelectedItem.Core\test_subModelSelectedItem.Core.fsproj" />
+  </ItemGroup>
+
+</Project>
