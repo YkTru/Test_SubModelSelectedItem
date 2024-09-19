@@ -3,19 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fsWPF="clr-namespace:FsWPF;assembly=test_subModelSelectedItem.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Program;assembly=test_subModelSelectedItem.Core"
-    Title="SubModelSelectedItem"
+    Title="SubModelSelectedItem+StaticBindings"
     Width="600"
     d:DataContext="{d:DesignInstance Type=vm:Form_VM,
                                      IsDesignTimeCreatable=True}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Window.Resources>
-        <fsWPF:ComponentsToNameConverter
-            x:Key="ComponentsToNameConverter" />
-    </Window.Resources>
 
     <StackPanel
         Margin="0,15,0,0">
@@ -47,36 +42,52 @@
             </StackPanel>
         </GroupBox>
 
-        <TextBlock
-            Width="140"
-            Margin="10"
-            Padding="5"
-            Background="AntiqueWhite"
-            FontWeight="SemiBold"
-            Text="{Binding SelectedItemText}"
-            TextAlignment="Center" />
+        <StackPanel
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Margin="5,5"
+                Command="{Binding SelectRandom}">
+                Select random
+            </Button>
+            <Button
+                Width="100"
+                Margin="5,5"
+                Command="{Binding Deselect}">
+                Deselect
+            </Button>
+        </StackPanel>
 
         <ListView
-            Height="400"
+            Margin="5"
             HorizontalContentAlignment="Center"
+            BorderBrush="DarkGreen"
+            BorderThickness="2"
             ItemsSource="{Binding Components}"
-            SelectedItem="{Binding SelectedComponent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            SelectedItem="{Binding SelectedEntity}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel
                         Orientation="Horizontal">
-                        <TextBlock>
-                            <!--  Convert each component (TextBoxA, TextBoxB, TextBoxC) to its name  -->
-                            <TextBlock.Text>
-                                <Binding
-                                    Converter="{StaticResource ComponentsToNameConverter}"
-                                    Path="." />
-                            </TextBlock.Text>
-                        </TextBlock>
+                        <TextBlock
+                            Text="{Binding Name}" />
+                        <TextBlock
+                            Text="{Binding SelectedLabel}" />
+
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ListView>
+
+        <TextBlock
+            Width="280"
+            Margin="10"
+            Padding="5"
+            Background="AntiqueWhite"
+            FontWeight="SemiBold"
+            Text="{Binding SelectedEntityLog}"
+            TextAlignment="Center" />
 
     </StackPanel>
 </Window>
